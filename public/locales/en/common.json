@@ -1,0 +1,9 @@
+{
+    "sidebar": {
+        "home": "Home",
+        "search": "Search",
+        "library": "Library",
+        "createPlaylist": "Create Playlist",
+        "favorites": "Favorites"
+    }
+}
