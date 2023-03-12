@@ -21,15 +21,16 @@ const menuItems: SidebarItemProps[] = [
   {
     label: 'Library',
     Icon: BuildingLibraryIcon
-  },
-  {
-    label: 'Log Out',
-    Icon: ArrowLeftOnRectangleIcon,
-    onClick: () => {
-      signOut();
-    }
   }
 ];
+
+const logoutMenuItem: SidebarItemProps = {
+  label: 'Log Out',
+  Icon: ArrowLeftOnRectangleIcon,
+  onClick: () => {
+    signOut();
+  }
+};
 
 export default function Sidebar() {
   const { data: session, status } = useSession();
@@ -39,15 +40,27 @@ export default function Sidebar() {
   }, [session, status]);
 
   return (
-    <div className="h-screen w-60">
-      {menuItems.map(item => (
-        <SidebarItem
-          key={item.label}
-          label={item.label}
-          Icon={item.Icon}
-          onClick={item.onClick}
-        ></SidebarItem>
-      ))}
+    <div className="h-screen w-60 flex flex-col justify-between py-2">
+      <div>
+        {menuItems.map(item => (
+          <SidebarItem
+            key={item.label}
+            label={item.label}
+            Icon={item.Icon}
+            onClick={item.onClick}
+          ></SidebarItem>
+        ))}
+      </div>
+      {status === 'authenticated' && (
+        <div>
+          <SidebarItem
+            key={logoutMenuItem.label}
+            label={logoutMenuItem.label}
+            Icon={logoutMenuItem.Icon}
+            onClick={logoutMenuItem.onClick}
+          ></SidebarItem>
+        </div>
+      )}
     </div>
   );
 }
