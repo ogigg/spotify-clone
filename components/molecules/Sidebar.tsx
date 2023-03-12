@@ -8,6 +8,9 @@ import {
 import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
+import { spotifyApi } from '../../lib/spotify';
+import useSpotify from '../../hooks/useSpotify';
+import SideBarPlaylistsList from './SideBarPlaylistsList';
 
 const menuItems: SidebarItemProps[] = [
   {
@@ -33,11 +36,7 @@ const logoutMenuItem: SidebarItemProps = {
 };
 
 export default function Sidebar() {
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    console.log(session, status);
-  }, [session, status]);
+  const { status } = useSession();
 
   return (
     <div className="h-screen w-60 flex flex-col justify-between py-2">
@@ -51,6 +50,7 @@ export default function Sidebar() {
           ></SidebarItem>
         ))}
       </div>
+      <SideBarPlaylistsList />
       {status === 'authenticated' && (
         <div>
           <SidebarItem
