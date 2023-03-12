@@ -1,16 +1,32 @@
-export default function Login() {
-  const RESPONSE_TYPE = 'token';
-  console.log(process.env);
+import { BuiltInProviderType } from 'next-auth/providers';
+import { getProviders, signIn } from 'next-auth/react';
+
+export default function Login({ providers }: any) {
+  const login = () => {
+    signIn(providers.spotify.id, {
+      callbackUrl: '/'
+    });
+  };
+
   return (
     <div className="w-screen h-screen flex items-center justify-center">
-      <a
-        href={`${process.env.NEXT_PUBLIC_AUTH_ENDPOINT}?client_id=${process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}
+      <button
+        className="login text-white p-5 rounded-full bg-[#18D860]"
+        role="button"
+        onClick={login}
       >
-        Login to Spotify
-      </a>
-      <button className="login" role="button">
         Login via Spotify
       </button>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const providers = await getProviders();
+
+  return {
+    props: {
+      providers
+    }
+  };
 }
