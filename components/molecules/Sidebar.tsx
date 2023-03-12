@@ -6,6 +6,8 @@ import {
   ArrowLeftOnRectangleIcon
 } from '@heroicons/react/24/solid';
 import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 const menuItems: SidebarItemProps[] = [
   {
@@ -24,13 +26,18 @@ const menuItems: SidebarItemProps[] = [
     label: 'Log Out',
     Icon: ArrowLeftOnRectangleIcon,
     onClick: () => {
-      console.log('logałt');
       signOut();
     }
   }
 ];
 
 export default function Sidebar() {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    console.log(session, status);
+  }, [session, status]);
+
   return (
     <div className="h-screen w-60">
       {menuItems.map(item => (
