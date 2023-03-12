@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Overview
+
+This is a training project to learn what's new in next.js v13, practise with tailwind, redux, and aim for unit tests 100% code coverage
+
+It's a spotifi client clone, with live data taken from spotify API.
+Authentication is done via [next-auth](https://next-auth.js.org/)
+
+This project is created with [Next.js](https://nextjs.org/) and bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
