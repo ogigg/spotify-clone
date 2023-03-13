@@ -20,6 +20,9 @@ export const authOptions: AuthOptions = {
     async jwt({ token, account, user }) {
       // initial sign in
       if (account && user) {
+        if (account.access_token) {
+          spotifyApi.setAccessToken(account.access_token);
+        }
         return {
           ...token,
           accessToken: account.access_token,
@@ -29,6 +32,9 @@ export const authOptions: AuthOptions = {
         };
       }
       if (Date.now() < (token as any).accessTokenExpires) {
+        if ((token as any).accessToken) {
+          spotifyApi.setAccessToken((token as any).accessToken);
+        }
         return token;
       }
 
