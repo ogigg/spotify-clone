@@ -20,7 +20,6 @@ export default function SideBarPlaylistsList() {
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       spotifyApi.getUserPlaylists().then(({ body }) => {
-        console.log(body.items);
         setPlaylists(body.items);
       });
     }
